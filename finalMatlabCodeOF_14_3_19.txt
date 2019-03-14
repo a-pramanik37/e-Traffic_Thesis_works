@@ -1,0 +1,70 @@
+clc
+% Read in original RGB image.
+rgbImage = imread('14_03_2019 20_00_08_PM.png');
+% Extract color channels.
+redChannel = rgbImage(:,:,1); % Red channel
+greenChannel = rgbImage(:,:,2); % Green channel
+blueChannel = rgbImage(:,:,3); % Blue channel
+
+[ht1 wd1]=size(redChannel);
+
+
+% Get Size
+[ht,wd]=size(rgbImage);
+
+for i=1:ht
+    for j=1:1366
+        r=redChannel(i,j);
+        g=greenChannel(i,j);
+        b=blueChannel(i,j);
+        
+        if((r==99 && g==214 && b==104)|| (r==255 && g==151 && b==77) || (r==242 && g==60 && b==50)||(r==129 && g==31 && b==31))
+            continue;
+        else
+            redChannel(i,j)=0;
+            greenChannel(i,j)=0;
+            blueChannel(i,j)=0;
+        end
+            
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        %{
+        if(rdpxl==99||rdpxl==255||rdpxl==242||rdpxl==129)
+            redChannel(i,j)=rdpxl;
+        else
+            redChannel(i,j)=0;
+        end
+        
+        
+        if(grnpxl==214||grnpxl==151||grnpxl==60||grnpxl==31)
+            greenChannel(i,j)=grnpxl;
+        else
+            greenChannel(i,j)=0;
+        end
+        
+        
+        
+        if(blpxl==104||blpxl==77||blpxl==50||blpxl==31)
+            blueChannel(i,j)=blpxl;
+        else
+            blueChannel(i,j)=0;
+        end
+        %}
+        
+    end
+end
+
+
+% Recombine the individual color channels to create the original RGB image again.
+recombinedRGBImage = cat(3, redChannel, greenChannel, blueChannel);
+imshow(recombinedRGBImage);
+imwrite(recombinedRGBImage,'C:\Users\User\Desktop\ak\14_03_2019 20_00_08_PM_mask.png');
+%}
